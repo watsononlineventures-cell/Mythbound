@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#070b1c" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🦅</text></svg>" />
+    <title>Mythbound</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="apple-touch-icon" href="./icon-192.png" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="stylesheet" href="./src/app/style.css" />
+  </head>
+  <body>
+    <div id="bg">
+      <div class="bgl on" data-t="base"></div>
+      <div class="bgl" data-t="free"></div>
+      <div class="bgl" data-t="hold"></div>
+      <div class="bgl" data-t="awake"></div>
+    </div>
+    <div id="loading">
+      <img data-art="logo.webp" alt="Mythbound" />
+      <div class="bar"><i id="load-bar"></i></div>
+    </div>
+    <div id="app">
+      <header id="top">
+        <div id="logo-row">
+          <button id="bestiary-btn" class="hbtn" aria-label="Beast Bestiary">📖</button>
+          <img id="logo" data-art="logo.webp" alt="Mythbound" />
+          <button id="goals-btn" class="hbtn" aria-label="Daily goals">🎯</button>
+        </div>
+        <div id="jackpots">
+          <div class="jp grand"><span>GRAND</span><b id="jp-GRAND">0</b></div>
+          <div class="jp major"><span>MAJOR</span><b id="jp-MAJOR">0</b></div>
+          <div class="jp minor"><span>MINOR</span><b id="jp-MINOR">0</b></div>
+          <div class="jp mini"><span>MINI</span><b id="jp-MINI">0</b></div>
+        </div>
+        <div id="mhb">
+          <div class="mhb storm" id="mhb-STORM"><span class="n">STORM</span><b>0</b><span class="by">MUST HIT BY <i>0</i></span><div class="fill"></div></div>
+          <div class="mhb thunder" id="mhb-THUNDER"><span class="n">THUNDER</span><b>0</b><span class="by">MUST HIT BY <i>0</i></span><div class="fill"></div></div>
+        </div>
+        <div id="meter-row">
+        <img id="meter-hero" data-art="hero_dormant.webp" alt="" />
+        <div id="meter" title="Every orb in the base game wakes the beast. A full meter makes the next Hold & Spin awakened: up to 12 rows, 1.5x orbs, 5,000x Grand.">
+          <div id="meter-fill"></div>
+          <span id="meter-label">BEAST AWAKENING 0%</span>
+        </div>
+        </div>
+        <div id="debug" hidden>
+          <b>Playtest</b>
+          <button data-force="hs">Hold &amp; Spin</button>
+          <button data-force="hsbig">Big Hold &amp; Spin</button>
+          <button data-force="awake">Awakened</button>
+          <button data-force="fg">Free Games</button>
+          <button data-force="hoard">Hoard</button>
+          <button data-force="special">Specials</button>
+          <button data-force="collector">Collector</button>
+          <button data-force="doors">Doors</button>
+          <button data-force="bank">Orb Bank</button>
+          <button data-force="storm">Storm MHB</button>
+          <button data-force="thunder">Thunder MHB</button>
+          <button data-force="coins">+$500</button>
+        </div>
+      </header>
+
+      <main id="stage">
+        <div id="status" hidden></div>
+        <div id="tap-hint" class="tap-hint" hidden>TAP TO RESPIN</div>
+        <div id="banner" hidden><div id="banner-title"></div><div id="banner-sub"></div></div>
+      </main>
+
+      <footer id="controls">
+        <div class="readouts">
+          <div><span>BALANCE</span><b id="balance">$0.00</b></div>
+          <div class="mid">
+            <button id="rules-btn" aria-label="Game rules">i</button>
+            <button id="sound" aria-label="Sound on or off">🔊</button>
+            <button id="cabinet-btn" aria-label="Cabinet mode (full screen)">⛶</button>
+          </div>
+          <div class="win"><span>WIN</span><b id="win">$0.00</b></div>
+        </div>
+        <div class="buttons">
+          <div class="bet">
+            <button id="denom-btn" aria-label="Choose denomination"><small>DENOM</small>1¢</button>
+            <button id="bet-down" aria-label="Lower bet">−</button>
+            <div><span id="bet-label">BET 1x</span><b id="bet">0</b></div>
+            <button id="bet-up" aria-label="Raise bet">+</button>
+          </div>
+          <button id="spin" aria-label="Spin">SPIN</button>
+          <div class="toggles">
+            <button id="turbo" class="toggle">TURBO</button>
+            <button id="auto" class="toggle">AUTO</button>
+          </div>
+        </div>
+      </footer>
+
+      <div id="feature" class="modal feature" hidden>
+        <div class="f-rays"></div>
+        <div class="f-card">
+          <img class="f-img" alt="" hidden />
+          <div class="f-kicker"></div>
+          <h1 class="f-title"></h1>
+          <div class="f-sub"></div>
+          <div class="f-detail"></div>
+          <button class="f-go">TAP TO START</button>
+        </div>
+      </div>
+
+      <div id="hoard" class="modal" hidden>
+        <div class="hoard-card">
+          <h2>THE THUNDERBIRD'S HOARD</h2>
+          <div id="hoard-tally"></div>
+          <div id="hoard-grid"></div>
+          <p id="hoard-msg"></p>
+          <button id="hoard-done" class="f-go" hidden>COLLECT</button>
+        </div>
+      </div>
+
+      <div id="bestiary" class="modal" hidden>
+        <div class="pg-card">
+          <header><span>BEAST BESTIARY</span><button class="pg-close" aria-label="Close">×</button></header>
+          <p id="bestiary-count"></p>
+          <div class="pg-bar"><i id="bestiary-fill"></i></div>
+          <p id="bestiary-prize" class="sub"></p>
+          <div id="bestiary-grid"></div>
+        </div>
+      </div>
+
+      <div id="goals" class="modal" hidden>
+        <div class="pg-card">
+          <header><span>DAILY GOALS</span><button class="pg-close" aria-label="Close">×</button></header>
+          <p class="sub">New goals every day at midnight.</p>
+          <div id="goals-list"></div>
+          <h3>Daily bonus streak</h3>
+          <div id="streak-row"></div>
+          <p class="sub">Come back every day to climb the streak. Miss a day and it starts over.</p>
+        </div>
+      </div>
+
+      <div id="denoms" class="modal" hidden>
+        <div class="pg-card">
+          <header><span>DENOMINATION</span><button class="pg-close" aria-label="Close">×</button></header>
+          <p class="sub">Every denomination has its own Must Hit By jackpots, its own Beast meters, and its own hot and cold streaks. Watch the meters and recent results to find one that's working.</p>
+          <div id="denom-grid"></div>
+        </div>
+      </div>
+
+      <div id="toasts"></div>
+
+      <div id="attract" hidden>
+        <img class="a-hero" data-art="hero_awakened.webp" alt="" />
+        <img class="a-logo" data-art="logo.webp" alt="Mythbound" />
+        <div class="a-jps">
+          <div class="grand"><span>GRAND</span><b id="a-GRAND"></b></div>
+          <div class="major"><span>MAJOR</span><b id="a-MAJOR"></b></div>
+          <div class="minor"><span>MINOR</span><b id="a-MINOR"></b></div>
+          <div class="mini"><span>MINI</span><b id="a-MINI"></b></div>
+        </div>
+        <p class="a-tag" id="a-tag">Hold &amp; Spin for four jackpots</p>
+        <div class="a-tap">TAP TO PLAY</div>
+      </div>
+
+      <div id="rules" class="modal" hidden>
+        <div class="rules-card">
+          <header><img data-art="logo.webp" alt="Mythbound" /><span>Game rules</span><button id="rules-close" aria-label="Close">×</button></header>
+          <div id="rules-body"></div>
+        </div>
+      </div>
+
+      <div id="refill" class="modal" hidden>
+        <div class="card">
+          <h2>The beast is resting</h2>
+          <p>You're out of money. <b>$500</b> more arrives in <b id="refill-time">--:--</b>.</p>
+          <button id="wake">Wake the beast now</button>
+          <p class="small" id="wake-note">You can wake it early once a day.</p>
+        </div>
+      </div>
+
+    </div>
+    <script type="module" src="./src/app/main.ts"></script>
+  </body>
+</html>

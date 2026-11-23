@@ -1,0 +1,28 @@
+{
+  "name": "mythbound",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && node scripts/gen-sw.mjs",
+    "test": "vitest run",
+    "sim": "tsx sim/simulate.ts",
+    "sim:check": "tsx sim/simulate.ts 10000000 1 --check"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.0"
+  },
+  "type": "module",
+  "private": true,
+  "dependencies": {
+    "gsap": "^3.15.1",
+    "pixi.js": "^8.23.0"
+  }
+}

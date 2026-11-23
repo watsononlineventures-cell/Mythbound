@@ -1,0 +1,16 @@
+{
+  "name": "Mythbound",
+  "short_name": "Mythbound",
+  "description": "A free-to-play mythic beasts hold & spin slot.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "fullscreen",
+  "display_override": ["fullscreen", "standalone"],
+  "orientation": "any",
+  "background_color": "#070b1c",
+  "theme_color": "#070b1c",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
