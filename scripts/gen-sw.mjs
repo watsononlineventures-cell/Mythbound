@@ -5,7 +5,7 @@ import { createHash } from 'node:crypto';
 import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
-const dist = new URL('../dist/', import.meta.url).pathname;
+const dist = process.argv[2] ? new URL(`../${process.argv[2]}/`, import.meta.url).pathname : new URL('../dist/', import.meta.url).pathname;
 const walk = (d) => readdirSync(d).flatMap((f) => (statSync(join(d, f)).isDirectory() ? walk(join(d, f)) : [join(d, f)]));
 const files = walk(dist).map((f) => relative(dist, f)).filter((f) => f !== 'sw.js').sort();
 const hash = createHash('sha256');

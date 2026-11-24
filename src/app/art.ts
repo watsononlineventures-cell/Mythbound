@@ -15,7 +15,7 @@ const ART: Partial<Record<ArtName, Texture>> = {};
 /** Texture for an art name, or undefined if it failed to load (callers fall back to placeholders). */
 export const art = (name: ArtName): Texture | undefined => ART[name];
 
-export const artUrl = (file: string) => new URL(`art/${file}`, document.baseURI).href;
+export const artUrl = (file: string) => new URL(`${import.meta.env.VITE_FLAT ? '' : 'art/'}${file}`, document.baseURI).href;
 
 export async function loadArt(onProgress?: (p: number) => void) {
   const total = NAMES.length;

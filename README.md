@@ -2,7 +2,7 @@
 
 A free-to-play, Link-style hold & spin slot game with a mythic beasts theme. Play money only: nothing can be bought or cashed out.
 
-**Play:** https://riftsofgenesis-afk.github.io/mythbound/
+**Play:** https://watsononlineventures-cell.github.io/Mythbound/
 
 ## Install on your phone
 

@@ -3,6 +3,9 @@
  * Placeholder until real music/SFX arrive from the prompt pack, but the API stays the same.
  */
 
+/** Flat builds (for phone uploads with no folders) keep every file beside index.html. */
+const SFX_DIR = import.meta.env.VITE_FLAT ? './' : './sfx/';
+
 export type Track = 'base' | 'free' | 'hold' | 'awake';
 
 const hz = (midi: number) => 440 * Math.pow(2, (midi - 69) / 12);
@@ -369,7 +372,7 @@ export class AudioEngine {
   private loadSamples() {
     const c = this.ctx!;
     for (const [track, name] of Object.entries(AudioEngine.LOOPS) as [Track, string][]) {
-      fetch(new URL(`./sfx/${name}.wav`, document.baseURI).href)
+      fetch(new URL(`${SFX_DIR}${name}.wav`, document.baseURI).href)
         .then((r) => r.arrayBuffer())
         .then((b) => new Promise<AudioBuffer>((ok, bad) => c.decodeAudioData(b, ok, bad)))
         .then((buf) => {
@@ -380,7 +383,7 @@ export class AudioEngine {
         .catch(() => { /* keep the synth */ });
     }
     for (const name of Object.values(AudioEngine.SAMPLES)) {
-      fetch(new URL(`./sfx/${name}.wav`, document.baseURI).href)
+      fetch(new URL(`${SFX_DIR}${name}.wav`, document.baseURI).href)
         .then((r) => r.arrayBuffer())
         .then((b) => new Promise<AudioBuffer>((ok, bad) => c.decodeAudioData(b, ok, bad)))
         .then((buf) => this.buffers.set(name, buf))
